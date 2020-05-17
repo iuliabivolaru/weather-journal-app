@@ -1,7 +1,7 @@
 
 // Setup empty JS object to act as endpoint for all routes
-var projectData = {};
-receivedDataArray = [];
+var weatherData = {};
+var receivedDataArray = [];
 
 // Require Express to run server and routes
 const express = require('express');
@@ -31,12 +31,16 @@ app.get('/all', function getHandler(request, response) {
     response.send(projectData);
 });
 
-app.post('/data', function postHandler(request, response) {
+app.post('/addWeatherData', function postHandler(request, response) {
     let body = request.body;
-    let weatherData = {
-        temperature: body.temperature,
-        date: body.date,
-        userReponse: body.userReponse
+    console.log(body);
+    weatherData = {
+        perceivedTemperature: body.perceivedTemp,
+        minTemp: body.minTemp,
+        maxTemp: body.maxTemp,
+        humidity: body.humidity
     };
     receivedDataArray.push(weatherData);
+    response.send({ans: 1});
+    console.log(receivedDataArray);
 });

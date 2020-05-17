@@ -6,20 +6,48 @@ document.getElementById('generate').addEventListener('click', populateAndGetWeat
 
 function populateAndGetWeatherData() {
     const zipCode = document.getElementById('zip').value;
-    getWeatherData(baseUrl, zipCode, apiKey);
+    getWeatherData(baseUrl, zipCode, apiKey)
+        .then(data => {
+            console.log(data);
+            postWeatherData('/addWeatherData', 
+            { perceivedTemp: data.main.feels_like, 
+              minTemp: data.main.temp_min, 
+              maxTemp: data.main.temp_max, 
+              humidity: data.main.humidity });
+        });
 }
 
 const getWeatherData = async (baseUrl, zipCode, apiKey) => {
     const response = await fetch(baseUrl + zipCode + apiKey);
     try {
         const data = await response.json();
-        console.log(data);
         return data;
     } catch(error) {
         console.log(error);
     }
 }
 
+const postWeatherData = async (url = '', data = {}) => {
+    console.log(data);
+    const response = await fetch(url, {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+    try {
+        const postedData = await response.json();
+        console.log('postedData ', postedData);
+        return postedData;
+    } catch(error) {
+        console.log("error", error);
+    }
+}
+
 // Create a new date instance dynamically with JS
 let d = new Date();
 let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
+
+// TODO: - country code de pus in input; restyle; 
