@@ -13,6 +13,9 @@ function populateAndGetWeatherData() {
             { temperature: data.main.feels_like,
               usersFeelings,
               date: todaysDate });
+            document.getElementById('date').innerHTML = todaysDate;
+            document.getElementById('temp').innerHTML = data.main.feels_like;
+            document.getElementById('content').innerHTML = usersFeelings;                      
         });
 }
 
