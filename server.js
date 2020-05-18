@@ -35,10 +35,9 @@ app.post('/addWeatherData', function postHandler(request, response) {
     let body = request.body;
     console.log(body);
     weatherData = {
-        perceivedTemperature: body.perceivedTemp,
-        minTemp: body.minTemp,
-        maxTemp: body.maxTemp,
-        humidity: body.humidity
+        perceivedTemperature: body.temperature,
+        content: body.content,
+        date: body.date
     };
     receivedDataArray.push(weatherData);
     response.send({ans: 1});
