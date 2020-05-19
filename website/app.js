@@ -5,8 +5,9 @@ document.getElementById('generate').addEventListener('click', populateAndGetWeat
 
 function populateAndGetWeatherData() {
     const zipCode = document.getElementById('zip').value;
-    let usersFeelings = document.getElementById('feelings').value;
-    getWeatherData(baseUrl, zipCode, apiKey)
+    const countryCode = document.getElementById('country').value;
+    const usersFeelings = document.getElementById('feelings').value;
+    getWeatherData(baseUrl, zipCode, countryCode, apiKey)
         .then(data => {
             console.log(data);
             postWeatherData('/addWeatherData', 
@@ -19,8 +20,8 @@ function populateAndGetWeatherData() {
         });
 }
 
-const getWeatherData = async (baseUrl, zipCode, apiKey) => {
-    const response = await fetch(baseUrl + zipCode + apiKey);
+const getWeatherData = async (baseUrl, zipCode, countryCode, apiKey) => {
+    const response = await fetch(baseUrl + zipCode + "," + countryCode + apiKey);
     try {
         const data = await response.json();
         return data;
@@ -52,5 +53,4 @@ const postWeatherData = async (url = '', data = {}) => {
 let d = new Date();
 let todaysDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
 
-// TODO: - country code de pus in input; restyle; de modificat obiectul trimis in post - de pus temp, content 
-// si date in loc; de update UI
+// TODO: - country code de pus in input; restyle; refactor code
