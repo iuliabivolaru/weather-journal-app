@@ -33,13 +33,12 @@ app.get('/all', function getHandler(request, response) {
 
 app.post('/addWeatherData', function postHandler(request, response) {
     let body = request.body;
-    console.log(body);
     weatherData = {
         perceivedTemperature: body.temperature,
-        content: body.content,
+        content: body.usersFeelings,
         date: body.date
     };
     receivedDataArray.push(weatherData);
-    response.send({ans: 1});
+    response.send({post: "successful"});
     console.log(receivedDataArray);
 });

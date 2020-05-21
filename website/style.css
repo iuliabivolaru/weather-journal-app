@@ -1,19 +1,23 @@
 body{
     background: #fffff8;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #564985;
+    font-size: 20px;
 }
 
 #app{
     display: grid;
     grid-auto-rows: minmax(60px, auto);
     justify-items: center;
-    /* grid-template-columns:  */
-    height:100vh;
-    background: #f23557;
+    grid-template-areas: "headline headline"
+                         "zip zip"
+                         "country country"
+                         "feel feel"
+                         "button button"
+                         "entry entry";
+    height: 100vh;
     color: #f0d43a;
-    justify-content: center;
     grid-gap: 1em;
-    font-size: 20px;
     font-family: 'Oswald', sans-serif;
 }
 
@@ -21,8 +25,23 @@ body{
 
 }
 
+.zip {
+    grid-area: zip;
+}
+
+.country {
+    grid-area: country;
+}
+
+.feel {
+    grid-area: feel;
+}
+
 .entry{
+    min-width: 500px;
     background: rgba(59, 74, 107, .4);
+    margin-bottom: 20px;
+    grid-area: entry;
 }
 
 #entryHolder{
@@ -42,18 +61,15 @@ body{
 }
 
 .headline {
-    margin: 30px;
+    margin: 60px 0;
+    font-size: 27px;
 }
 
 .title{
-
+    margin-bottom: 20px;
 }
 
 /*  Basic Styling To Override Default For Basic HTML Elements */
-label{
-    display:block;
-    font-size: 27px;
-}
 
 input{
     display: block;
@@ -71,10 +87,11 @@ button{
     height: 50px;
     background: #3b4a6b;
     color: #f0d43a;
-    font-size: 26px;
+    font-size: 20px;
     font-family: 'Oswald', sans-serif;
     border: none;
     box-shadow: 2px 4px 5px #444;
+    grid-area: button;
 }
 
 h1{
